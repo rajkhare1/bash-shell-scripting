@@ -1,0 +1,33 @@
+Important commands:
+===================
+1. what is our identity?
+$: whoami
+rajkhare
+
+2. where are we?
+$: pwd
+/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting
+
+3. what inside the present working directory?
+a. list of all the files and folder
+$: ls
+Bash-Shell-Intro.pdf			MT-Les2bis-Terminal-Overview.pdf	mn_bash-shell-scripting
+
+b. list of all the files and folder including hidden itesm
+$: ls -a
+.					.git					MT-Les2bis-Terminal-Overview.pdf
+..					Bash-Shell-Intro.pdf			mn_bash-shell-scripting
+
+c. how to read the information about our files and folders?--> very very important to understand
+$: ls -l
+total 776
+-rw-r--r--@ 1 rajkhare  staff  174347 Dec 29 09:10 Bash-Shell-Intro.pdf
+-rw-r--r--@ 1 rajkhare  staff  214942 Dec 29 09:15 MT-Les2bis-Terminal-Overview.pdf
+-rw-r--r--  1 rajkhare  staff     500 Dec 29 19:57 mn_bash-shell-scripting
+drwxr-xr-x  2 rajkhare  staff      64 Dec 29 20:05 testDir
+---
+|d|->'shows this is directory'|rwx|->'all divided the groups of 3 characters,So any file can be Readable(r),Writable(w) or Executable(x) and 1st 3 characters are refered to the Owners to the file. So here Owner(rajkhare) has the read,write,execute permissions'|r-x|->'2nd 3 characters are refered to the Group to which this file or folder assigned. So here the Group(staff) has read and execute permission only'|r-x|->'3rd groups of 3 charecters refers to Everyone else who is not the Owner and not the User of this Group, So here everyone has the read, and execute permissions only.'  |2|->'this number is not very imp, shows the no. of links this file or folder has' |rajkhare|->'this is the owner'  |staff|->'this is the Group to wchich this testDir folder is assigned'  |64|->'size of the file' |Dec 29 20:05|->'when the file last edited or created' |testDir|->'name of the file or folder'
+
+Note: Every file or directory is assigned to some 'Group' which contains one or more 'Users'
+---
+
