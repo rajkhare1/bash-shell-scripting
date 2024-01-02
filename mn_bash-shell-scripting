@@ -31,3 +31,34 @@ drwxr-xr-x  2 rajkhare  staff      64 Dec 29 20:05 testDir
 Note: Every file or directory is assigned to some 'Group' which contains one or more 'Users'
 ---
 
+d. list of specific directory
+$: ls testDir/
+test.txt
+
+e. list of specific directory including hidden files.
+$ ls -la testDir/
+total 8
+drwxr-xr-x  3 rajkhare  staff   96 Jan  2 13:00 .
+drwxr-xr-x  7 rajkhare  staff  224 Dec 29 20:05 ..
+-rw-r--r--  1 rajkhare  staff   34 Jan  2 13:00 test.txt
+
+
+f. if you want to know about the information about some file:
+$ file Bash-Shell-Intro.pdf
+Bash-Shell-Intro.pdf: PDF document, version 1.3, 5 pages
+
+4. How we can change the working directory to your home folder?
+$ cd
+press enter,it will always move to home folder.
+
+5. move 2-folder in one command.
+$ cd ../..
+
+6. commad to any type of file/folder from terminal:
+$ open [fileName or Foldername]
+Note -> . represent the present working directory. so if i do 'open .' then it will open the current folder.
+Note -> if you are using Linux...then insetad of open use the xdg-open
+
+7. To create the file or modified the date of file creation we will use the command touch:
+$ touch [fileName.fileExtension]
+
