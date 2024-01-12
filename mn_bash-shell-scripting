@@ -62,3 +62,31 @@ Note -> if you are using Linux...then insetad of open use the xdg-open
 7. To create the file or modified the date of file creation we will use the command touch:
 $ touch [fileName.fileExtension]
 
+8. To copy one file into another:
+$ cp text.txt text-copy.txt
+This will create the new file 'text-copy.txt' and copy the content of the text.txt in it.
+
+9. remove the file:
+$ rm fileName
+
+9a) remove the folder which haveing some file:
+$ rm -rf folderName
+
+10. use of * -> '*' means 0 or more 
+10a) $ file 1.txt 2.txt
+can be used like
+$ file *.txt
+
+10b) move every text file in some folder
+$ mv *.txt someFolderName
+
+10c) we can remove everythig that start from latter b
+$ rm b*
+
+10d) remove everytning inside someFolder
+$ rm someFolder/*
+
+
+
+
+
