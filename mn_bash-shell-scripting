@@ -86,6 +86,15 @@ $ rm b*
 10d) remove everytning inside someFolder
 $ rm someFolder/*
 
+11. sometimes we copy a folder to another folder but it is not worked
+$ cp A-Folder  B-Folder
+cp: A-Folder is a directory (not copied)
+in this we should always use the option '-R' -> Recursively
+$ cp -R A-Folder  B-Folder
+
+Note: mv command does not required -R, otherwise it work for cp and rm, ls.
+
+12. 
 
 
 
