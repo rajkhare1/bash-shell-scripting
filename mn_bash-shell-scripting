@@ -1,5 +1,7 @@
 Important commands:
 ===================
+
+===================================BASIC COMMANDS===============================
 1. what is our identity?
 $: whoami
 rajkhare
@@ -70,7 +72,11 @@ This will create the new file 'text-copy.txt' and copy the content of the text.t
 $ rm fileName
 
 9a) remove the folder which haveing some file:
-$ rm -rf folderName
+$ rm -r folderName
+
+9b) if you want to prompt the permission notification before removing then use the option -i
+$ rm -ri folderName
+it will ask your permission in form of  y or n
 
 10. use of * -> '*' means 0 or more 
 10a) $ file 1.txt 2.txt
@@ -94,7 +100,300 @@ $ cp -R A-Folder  B-Folder
 
 Note: mv command does not required -R, otherwise it work for cp and rm, ls.
 
-12. 
+========================ADVANCED COMMADS===============================
+
+12. redirect commad '>' redirect the output of any commad inside a file
+$ echo "Hello Raj" > newtext.txt
+it will create the new file if not present there and put the text there.
+Note: Be careful with redirect '>', becuase if the file exists and you run redirect command again then it will override the value of previously present the contents of the file.
+
+12a) if you want to append something on already exsinting file '>>'
+$ echo "I want to add this line" >> newtext.txt
+then it will add in next line of that flie.
+
+13. we can concatinate output of two or more file using cat command and then redirect to new file
+$ cat file1.txt file2.txt > file2.txt
+
+14. '|' -> output of one command can be piped-in to the input to another command
+$ ls someFolder | less
+Note: '|' pipe uses a temporary file somewhere and then next command can run on it.
+
+14a) we can use this with tail commmand. tail command is useful when we want to see from the last. and number specified the no. of lines you want to see
+$ ls
+Bash-Shell-Intro.pdf             mn_bash-shell-scripting          test.txt
+Exercises                        newtext.txt
+MT-Les2bis-Terminal-Overview.pdf test-copy.txt
+$ ls | tail -4
+mn_bash-shell-scripting
+newtext.txt
+test-copy.txt
+test.txt
+
+15. 'find' -> to search somefile of directory you are interested,
+syntax: find [directoryName] -name [file/direcotry name] -type [d/f]
+
+$ find Exercises/ -name atext.txt
+Exercises//exercise1/Ex3/atext.txt
+so it will return the path that where we can find this file. in above case we need to go inside the Exercise then inside the exercise1/EX/ then we can find the file atext.txt
+
+if nothing find then no output will return
+$  find Exercises/ -name atext1.txt
+
+Note: if you pass '-type f' -> only for file
+            '-type d' -> only for directory
+
+for e.g:
+$ find Exercises/ -type d
+Exercises/
+Exercises//exercise2
+Exercises//exercise1
+Exercises//exercise1/Ex3
+Exercises//exercise1/Ex3/Stuff
+
+
+find Exercises/ -type f
+Exercises//exercise2/f4.txt
+Exercises//exercise2/f1.txt
+Exercises//exercise2/f3.txt
+Exercises//exercise2/f2.txt
+Exercises//exercise1/Ex3/file3.txt
+Exercises//exercise1/Ex3/btext.txt
+Exercises//exercise1/Ex3/file3.xls
+Exercises//exercise1/Ex3/file2.xls
+Exercises//exercise1/Ex3/atext.txt
+Exercises//exercise1/Ex3/Stuff/file2.txt
+Exercises//exercise1/Ex3/Stuff/file3.txt
+Exercises//exercise1/Ex3/Stuff/file1.txt
+Exercises//exercise1/Ex3/a.xls
+
+
+16. 'grep' -> used to search the text inside a file. grep is case sensitive
+syntax: grep [searchingText] [fileName]
+
+e.g.
+
+$ cat newtext.txt 
+Hello Raj
+I want to appned in new line
+
+$ grep Raj newtext.txt 
+Hello Raj
+
+
+17. very useful if you want to search grep with case insesitive then use the '-i'
+$ grep -i raj newtext.txt
+Hello Raj
+Note: grep always give the result the line that contains the search word. not like the first word or letter found.
+
+17a) grep -v -> gives the everything except the search you mentioned
+$ ls | grep -v t
+Exercises
+MT-Les2bis-Terminal-Overview.pdf
+
+18) AWK command part-1
+awk command useful if want to fetch the information from the file like tabular format etc
+$ awk '{print}' text1.txt 
+NAME	COUNTRY	SEX 	AGE  POINTS 
+Frank	usa	M	32	4323:001
+John	usa	M	61	232:002
+Mark	italy	M	43	2243:013
+Lara	spain	F	32	2321:007
+Daila	spain	F	32	1928:032
+Robert	germany	M	51	219:121
+Lisa	usa	F	22	2314:000
+BOB	france	M	27	576:002	
+R	italy	M	32	32
+
+
+18a) if you want to print the first column of this file
+$ awk '{print $1}' text1.txt 
+NAME
+Frank
+John
+Mark
+Lara
+Daila
+Robert
+Lisa
+BOB
+R
+
+18b) if you want to print the second column of the file
+$ awk '{print $2}' text1.txt 
+COUNTRY
+usa
+usa
+italy
+spain
+spain
+germany
+usa
+france
+italy
+
+
+18c) suppose you want to print two column together
+$ awk '{print $1,$2}' text1.txt 
+NAME COUNTRY
+Frank usa
+John usa
+Mark italy
+Lara spain
+Daila spain
+Robert germany
+Lisa usa
+BOB france
+R italy
+
+
+18d) other way to pring all the column $0
+$ awk '{print $0}' text1.txt 
+NAME	COUNTRY	SEX 	AGE  POINTS 
+Frank	usa	M	32	4323:001
+John	usa	M	61	232:002
+Mark	italy	M	43	2243:013
+Lara	spain	F	32	2321:007
+Daila	spain	F	32	1928:032
+Robert	germany	M	51	219:121
+Lisa	usa	F	22	2314:000
+BOB	france	M	27	576:002	
+R	italy	M	32	32
+
+18e) print the last column if you don't know the column number
+$ awk '{print $NF}' text1.txt 
+POINTS
+4323:001
+232:002
+2243:013
+2321:007
+1928:032
+219:121
+2314:000
+576:002
+32
+
+
+18f) if you want second last coloumn from the last
+$ awk '{print $(NF-1)}' text1.txt 
+AGE
+32
+61
+43
+32
+32
+51
+22
+27
+32
+
+
+19) if you want to explore the line through awk command
+for e.g second line
+$ awk 'NR==2 {print $0}' text1.txt 
+Frank	usa	M	32	4323:001
+
+19a) if you want line no.2 to line no.5
+$ awk 'NR==2,NR==5 {print $0}' text1.txt 
+Frank	usa	M	32	4323:001
+John	usa	M	61	232:002
+Mark	italy	M	43	2243:013
+Lara	spain	F	32	2321:007
+
+19b) what if you want just line no.2 and line no.5 only, then use ;
+$ awk 'NR==2;NR==5 {print $0}' text1.txt 
+Frank	usa	M	32	4323:001
+Lara	spain	F	32	2321:007
+
+19c) you can use line and column in combination
+for e.g you want from line no.1 to line no.5 and only NAME and AGE colomn:
+awk 'NR==1,NR==5 {print $1,$4}' text1.txt 
+NAME AGE
+Frank 32
+John 61
+Mark 43
+Lara 32
+
+19d) suppose we have the file where we have separator is difeerent, in this case awk not able to recognise the coloumn and will print all the lines and column
+for.e.g:
+$ awk '{print $1}' c-text1.txt 
+NAME;COUNTRY;SEX
+Frank;usa;M;32;4323:001
+John;usa;M;61;232:002
+Mark;italy;M;43;2243:013
+Lara;spain;F;32;2321:007
+Daila;spain;F;32;1928:032
+Robert;germany;M;51;219:121
+Lisa;usa;F;22;2314:000
+BOB;france;M;27;576:002
+R;italy;M;32;32
+
+So here it not able to recognize the column 1
+But solution to this we can tell to awk commnad that what is the filed separator here by using '-F' option
+
+$ awk -F ";" '{print $1}' c-text1.txt 
+NAME
+Frank
+John
+Mark
+Lara
+Daila
+Robert
+Lisa
+BOB
+R
+
+19e) even it work for letter as separator also
+$ awk  '{print $0}' text1.txt 
+NAME	COUNTRY	SEX 	AGE  POINTS 
+Frank	usa	M	32	4323:001
+John	usa	M	61	232:002
+Mark	italy	M	43	2243:013
+Lara	spain	F	32	2321:007
+Daila	spain	F	32	1928:032
+Robert	germany	M	51	219:121
+Lisa	usa	F	22	2314:000
+BOB	france	M	27	576:002	
+R	italy	M	32	32
+
+so if you take latter u as a sepeator then 
+$ awk -F "u"  '{print $1}' text1.txt 
+NAME	COUNTRY	SEX 	AGE  POINTS 
+Frank	
+John	
+Mark	italy	M	43	2243:013
+Lara	spain	F	32	2321:007
+Daila	spain	F	32	1928:032
+Robert	germany	M	51	219:121
+Lisa	
+BOB	france	M	27	576:002	
+R	italy	M	32	32
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
