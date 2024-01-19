@@ -633,6 +633,110 @@ $ ls -lrt
 total 8
 -rw-r---w-  1 rajkhare  _guest  13 Jan 18 04:56 chowner.txt
 
+26. How to assign the values to the variables:
+$ echo "this is the line"
+this is the line
+
+$ myvar=573
+->just equal sign give the any value(number,string) to the variable
+Note: there must be no space between eqaul sign and value.
+
+$ echo "$myvar"
+573
+->We put the $beforeVariableName to fetch the value of the varable
+
+26a) we can use with other string as well
+$ echo "the value of my variable is $myvar"
+the value of my variable is 573
+
+27. How to we unset the variable?
+$ unset myvar
+
+$ echo "$myvar"
+
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ 
+-> this will give no value.
+
+27a) there is another way to access the variable using $ and {}
+$ myvar="this is raj"
+$ echo $myvar
+this is raj
+-> another way:
+$ echo ${myvar}
+this is raj
+-> but this syntax is not much used.
+
+27b) but other way give the clear picture to system that what variable you are accessing for e.g
+$ echo $myvarAA
+
+-> this will give nothing but if you use the {} then system is able to understand.
+$ echo ${myvar}AA
+this is rajAA
+
+
+27c) you can use it any command as well:
+$ mycommand1=ls
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ $mycommand1 
+Bash-Shell-Intro.pdf             mn_bash-shell-scripting          test.txt
+Exercises                        newtext.txt                      text1.txt
+MT-Les2bis-Terminal-Overview.pdf permissions
+c-text1.txt                      test-copy.txt
+
+27d) there is also variables that are saved in the system. these are called envirionment variables:
+for e.g if i use the USER environment variable then i get the name of my machine.
+$ echo $USER
+rajkhare
+
+$ echo $HOME
+/Users/rajkhare
+
+very very important environment variable is PATH.
+$ echo $PATH
+/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+
+28. Extremely useful use of variable is -> put the command inside it.
+to use it syntax is $(command) -> this will give the output of the command for e.g
+$ d=$(ls)
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo $d
+Bash-Shell-Intro.pdf Exercises MT-Les2bis-Terminal-Overview.pdf c-text1.txt mn_bash-shell-scripting newtext.txt permissions test-copy.txt test.txt text1.txt
+
+$(command) -> is also called command substitution.
+
+so creating your own variable is very useful.
+$ myBash=$(pwd)
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ cd
+Rajs-MacBook-Air:~ rajkhare$ ls $myBash 
+Bash-Shell-Intro.pdf             mn_bash-shell-scripting          test.txt
+Exercises                        newtext.txt                      text1.txt
+MT-Les2bis-Terminal-Overview.pdf permissions
+c-text1.txt                      test-copy.txt
+
+you can copy directly using the variable:
+$myBash 
+Rajs-MacBook-Air:~ rajkhare$ cd $myBash 
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ ls
+Bash-Shell-Intro.pdf             install.sh                       test-copy.txt
+Exercises                        mn_bash-shell-scripting          test.txt
+MT-Les2bis-Terminal-Overview.pdf newtext.txt                      text1.txt
+c-text1.txt                      permissions
+
+28a) Another way to command substitution is Backticks: ` `
+$ echo "$(date)"
+Sat Jan 20 04:09:06 IST 2024
+-> same way we can use using backticks
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo "`date`"
+Sat Jan 20 04:09:16 IST 2024
+
+> I don't recommanded to usd backticks `` use the $() instead of it. it has clear readiblility
+
+
+
+
+
+
+
+
 
 
 
