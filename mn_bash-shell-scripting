@@ -731,6 +731,35 @@ Sat Jan 20 04:09:16 IST 2024
 > I don't recommanded to usd backticks `` use the $() instead of it. it has clear readiblility
 
 
+29. suppose you want to set the variable permanately. because one you close the terminal, whatever value you have saved will be lost. so there is a way that you can set it even if you restart the terminal.
+
+one thing the terminal do one it's login it look for the login scripts from your $HOME folder and load values from there.
+it depends on your system but it will be one of from these scripts files:
+
+    .profile
+    .bashrc
+    .bash_profile
+    .login
+
+now open the file and put value there it will always shows once you start new terminal  
+
+$ vi ~/.bash_profile    
+
+->not put the value
+# my custom messages
+echo "Hello Mr. Raj, I am at your service :)"
+
+-> it will shwo like this if you start new terminal:
+Last login: Sun Jan 21 10:43:42 on ttys003
+Hello Mr. Raj, I am at your service :)
+
+
+29a)if you don't want to exit the terminal then you can load the script by using the source command:
+$ source ~/.bash_profile 
+Hello Mr. Raj, I am at your service :)
+Note: we can use $HOME as ~ symbol as well.
+
+
 
 
 
