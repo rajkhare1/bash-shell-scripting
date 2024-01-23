@@ -759,6 +759,28 @@ $ source ~/.bash_profile
 Hello Mr. Raj, I am at your service :)
 Note: we can use $HOME as ~ symbol as well.
 
+30. read -> is used for the puttting the some value inside the variable.
+$ read myVar
+this is i am putting the value using the read command
+
+$ echo $myVar
+this is i am putting the value using the read command
+
+30a) we can use the type -p if you want to show some lines before coming it.
+$ read -p "Type your age " age
+Type your age 41
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo $age
+41
+
+30b) if you don't want to show something like password(invisible text) then you can use the -s option
+$ read  -s [varaibleName for password]
+
+30c) you can use the both option combie like -ps for prepromt and password text
+$ read -sp "Passoword: " password
+Passoword: Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo $password 
+efforts007
+
+
 
 
 
