@@ -1,0 +1,8 @@
+#! /bin/bash
+
+echo this is my script
+echo bye bye
+echo ------------------------
+
+#this is the comment for myself
+#they do not affect in any way the program
