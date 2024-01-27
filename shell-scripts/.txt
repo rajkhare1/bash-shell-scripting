@@ -1,0 +1,5 @@
+total 16
+-rw-r--r--  1 rajkhare  staff    0 Jan 27 07:36 1.txt
+-rw-r--r--  1 rajkhare  staff    0 Jan 27 07:36 2.txt
+-rwxrw-r--@ 1 rajkhare  staff  251 Jan 27 06:41 myscript.sh
+-rwxrw-r--  1 rajkhare  staff  124 Jan 27 07:36 myscript2.sh
