@@ -780,10 +780,488 @@ $ read -sp "Passoword: " password
 Passoword: Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo $password 
 efforts007
 
+======================================SHELL SCRIPTING====================================
+
+1. Introduction:
+  creating the shell script like a create the program in any programming laguagage.
+
+  > The Terminally usually allows just one command at a time.
+  > Shell Scripts allows you to combine and run multiple commands together.
+  > Shell Scripts also allows you to use if-else statements and loops.
+
+  use-case:
+
+  > Choose a file, create 1540 copies of it with differents names and put those into different folders you also create...
+
+  it is almost impossible with mouse or with terminal, but you could combine those commands together in Script that do:
+
+       Sequence of the commands
+
+  a) Ask files to copy
+  b) Save file name in a variable
+  c) Ask numbers of copies and locations to copy to
+  d) Save those it other variables
+  e) Create the desired folders
+  f) Create a loop that copy the file the desired number of times, in the desired locations.
+
+2. how to execute the an executable file.
+   
+   $ ./shortscript.txt 
+   Hello
+   bye
+
+-> |./|=> location of the file  |shortscript.txt|=> name of the file.
+
+Note: we only need to give the location of the file and give the name of the file. that's it. it is not like you only need to give the ./  :)
+
+
+3. So everytime when you time ls for pwd. Actually these are the programs that executes. but where these programs contained inside the system?
+
+to know that we use the 'which' command.
+
+$ which ls
+/bin/ls
+
+$ which pwd
+/bin/pwd
+Rajs-MacBook-Air:shell-scripts rajkhare$ which bash
+/bin/bash
+
+-> you cannot open directly from the explorer these locations. but we can open through terminal:
+$ cd /
+Rajs-MacBook-Air:/ rajkhare$ ls
+Applications System       Volumes      cores        etc          opt          sbin         usr
+Library      Users        bin          dev          home         private      tmp          var
+Rajs-MacBook-Air:/ rajkhare$ open bin
+
+$ which javac
+/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/javac
+
+4. write our first shell script:
+--
+#! /bin/bash
+
+echo this is my script
+
+#this is the comment for myself
+#they do not affect in any way the program 
+
+--
+|#!|=> marker |/bin/bash| =>Location of the program
+
+script lines
+script lines
+
+#comment
+
+--
+
+5. previously we write the shell script file 'myscript.txt', but this is not the best way for the file extension for a shell file. here we put the file extension .txt that is not correct. we should give the file extension for it '.sh'
+
+so we rename it:
+$ mv myscript.txt myscript.sh
+Rajs-MacBook-Air:shell-scripts rajkhare$ ls
+myscript.sh
+
+
+6. how to run shell scripts from anywhere like our ls or other commands are worked.
+for that we need to add the full folder path in the PATH variable for that.
+Note: every command in the terminal is an executable scripts.
+
+$ pwd
+/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting/shell-scripts
+-> so we need to add this path in our PATH variable so inside it any scripts can directly run.
+note in PATH vaiable every path is seperated by ':'
+
+How to add it?
+for this we need to apply the techniques that how to manipulated the variables:
+$  var=abc
+Rajs-MacBook-Air:shell-scripts rajkhare$ echo $var
+abc
+$ var="xyz:${var}"
+Rajs-MacBook-Air:shell-scripts rajkhare$ echo $var
+xyz:abc
+
+so same thing we can apply and we will do in inside the login script at our home path:
+
+$ pwd
+/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting/shell-scripts
+Rajs-MacBook-Air:shell-scripts rajkhare$ cd
+Rajs-MacBook-Air:~ rajkhare$ ls -a
+.                   .bash_history       .gitconfig          .viminfo            Library             gitrepos
+..                  .bash_profile       .lemminx            .zsh_history        Movies              install.sh
+.CFUserTextEncoding .bash_sessions      .lesshst            .zsh_sessions       Music
+.DS_Store           .cache              .m2                 Desktop             Pictures
+.Trash              .config             .p2                 Documents           Public
+.android            .eclipse            .vim                Downloads           Raj
+Rajs-MacBook-Air:~ rajkhare$ vi .bash_profile 
+
+#Add the custom path
+PATH="/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting/shell-scripts:${PATH}"
+export PATH
+
+Rajs-MacBook-Air:~ rajkhare$ source .bash_profile 
+Hello Mr. Raj, I am at your service :)
+Rajs-MacBook-Air:~ rajkhare$ cd -
+/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting/shell-scripts
+Rajs-MacBook-Air:shell-scripts rajkhare$ ls
+myscript.sh
+Rajs-MacBook-Air:shell-scripts rajkhare$ myscript.sh
+What is your name: RAj
+Hello RAj nice to meet you
+
+$ echo $PATH
+/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting/shell-scripts:/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin:/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+
+=========================SHELL SCRIPTING OPERATIONS========================
+
+1. you can not do the airtmatic operations on the shell scripting 
+$ echo "2+3"
+2+3
+
+to solve that we need to use the airthmatic operations, it is similar to the commad oepartaions but with the double brackeats so we can use like this:
+
+$ echo "$((2+3))"
+5
+
+
+so like this we can do the shell scripting operations on every arithmatics operations from those operations.
+
+
+2. we can use the conditions like if else also using the shell scripts.
+syntax:
+
+2a) if conditions:
+
+if [conditions]; then
+    statements
+fi
+
+.....
+.....
+
+
+e.g
+------------
+#! /bin/bash
+
+echo "hello..."
+
+if [ 3 -eq 3 ]; then
+   echo "yes they are the same"
+fi
+
+echo "continue with your program"
+echo "bye"
+-------------------------
+
+some numberic conditons statements e.g.:
+======
+
+3 -eq 3  =>  3=3
+3 -ne 4  =>  3!=4
+3 -gt 1  =>  3>1
+3 -lt 7  =>  3<7
+3 -ge 3  =>  3>=3
+3 -le 3  =>  3<=3
+
+=====
+
+2b) else conditions.
+we can put the else condition with if conditions
+
+syntax:
+---
+
+if [conditions]; then
+    statements
+else
+    statements    
+fi
+
+.....
+.....
+
+
+e.g
+------------
+#! /bin/bash
+
+read -p "how old are you?" age
+
+if [ $age -gt 100 ]; then
+   echo "you are not very young"
+else
+   echo "you are still very young" 
+
+fi
+
+echo "bye"
+-------------------------
 
 
 
+2c) if-else conditions:
+we can use the if-else conditions also.
+syntax:
+=======
 
+#! /bin/bash
+
+read -p "type a integer between 1 and 4: " num
+
+if [ $num ==  1 ]; then
+   echo "typed 1"
+  elif [ $num == 2 ]; then
+     echo "typed 2"
+   elif [ $num == 3 ]; then
+     echo "typed 3"
+   elif [ $num == 4 ]; then
+     echo "typed 4"
+   else
+     echo "none of the above"
+
+fi
+
+echo "bye"
+================
+
+
+3. Exit
+
+3a) first we need to pay attention that we need to put the spaces between square brackets in if or elif 
+  conditions, otherwise on running the space it will give the errors.
+
+3b) when all the lines inside the scripts runs then it comes out of the script but we can between out of the scripts using the exit keyword.
+
+e.g
+
+#! /bin/bash
+
+echo "line 1"  
+echo "line 2"  
+echo "line 3"
+exit
+echo "line4"  
+echo "line5"
+-------------
+
+so this scrpt will show till line3 only.
+
+so why we use the 'exit'? 
+this is very useful when we use the conditional statments.
+
+for e.g:
+-----
+#! /bin/bash
+
+echo "line 1"  
+echo "line 2"  
+echo "line 3"
+echo "line4"  
+echo "line5"
+
+read -p "How old are you? " age
+if [ $age -lt 0 ]; then
+    echo "You cannot have the negative age!"
+    echo "Sorry this number could mess up the Shell"
+    echo "The program have to quit now!"
+    echo "**************************************"
+    exit
+fi  
+
+echo " "
+echo "Ok let's continue with the script:"
+echo "line6"
+echo "line7..........."
+
+--------------------
+
+4. OR conditions  '-o'
+
+4a)we can use the or conditions in conditional statements:
+
+for e.g:
+---------
+
+#! /bin/bash
+
+read -p "How old are you? " age
+
+if [ $age -lt 0 -o $age -gt 200 ]; then
+    echo "Number Not Acceptable"
+    exit
+fi
+
+echo "let us continue"    
+
+------------------
+
+4b) we can use the 'and' conditions as well
+for e.g:
+----
+#! /bin/bash
+
+read -p "How old are you? " age
+
+if [ $age -lt 0 -o $age -gt 200 ]; then
+    echo "Number Not Acceptable"
+    exit
+fi
+
+if [ $age -lt 64 -a $age -gt 26 ]; then
+    echo "you are between 26 and 64"
+    exit
+fi
+
+echo "let us continue" 
+-------------
+
+5. if you want to compare two strings:
+
+e.g:
+-------
+#! /bin/bash
+
+echo "hello"
+
+if [ "abcd" == "abcd" ]; then
+    echo "EQUAL !"
+fi
+
+echo "movig on"
+---------
+
+similar we can do the other conditions also:
+
+e.g:
+-------
+#! /bin/bash
+
+echo "hello"
+
+if [ "abcd" == "abcd" ]; then
+    echo "EQUAL !"
+fi
+
+echo "movig on"
+
+echo "----------------"
+
+if [ "abcd" != "abcd" ]; then
+    echo "DIFFERENT !"
+fi
+
+echo "end"
+---------
+
+6. we can check if the string is empty using the '-z'
+
+e.g:
+---
+#! /bin/bash
+
+read -p "Type something: " str
+if [ -z $str ]; then
+    echo "this is an empty string"
+    exit
+fi
+
+echo "moving on"
+-------
+
+
+Note: if you are putting space beween string while typing input, then it will considered as two seperate strings.
+
+but if i wrap declareion inside string then we can give space strings to it.
+
+e.g:
+---
+#! /bin/bash
+
+read -p "Type something: " str
+if [ -z "$str" ]; then
+    echo "this is an empty string"
+    exit
+fi
+
+echo "moving on"
+-------
+
+7. conditions on the files:
+the sturcture of conditions on files is same is conditions on
+suppose you want to check some files exists or not you can write following scripts:
+we can use the '-e' options to check if the file exists or not?
+
+e.g:
+----
+#! /bin/bash
+
+# Conditions to check if the a file EXISTS
+read -p "give me the name of the file: " myfile
+if [ -e $myfile ]; then
+    echo "$myfile EXISTS"
+fi
+
+# Conditions to check if the a file is REGULAR FILE
+if [ -f $myfile ]; then
+    echo "$myfile is a REGULAR FILE"
+else 
+    echo "$myfile is NOT a REGULAR FILE"    
+fi
+
+# NEGATE A Condition
+
+if [ ! -e $myfile ]; then
+    echo "$myfile NOT EXISTS"
+fi
+
+# to check Directory Condition
+
+if [ -d $myfile ]; then
+    echo "$myfile is a DIRECTORY"
+else
+    echo "$myfile is NOT a DIRECTORY"   
+fi
+
+# Condition to check if the file is READABLE
+
+if [ -r $myfile ]; then
+    echo "$myfile is READABLE"
+else 
+    echo "$myfile is NOT READABLE"  
+fi
+
+# Condition to check if the file is WRITABLE
+
+if [ -w $myfile ]; then
+    echo "$myfile is WRITABLE"
+else 
+    echo "$myfile is NOT WRITABLE"  
+fi
+
+# Condition to check if the file is empty
+
+if [ -s $myfile ]; then
+    echo "$myfile is NOT EMPTY"
+else
+    echo "$myfile is EMPTY" 
+
+fi
+
+# Condition to check if the file is EXECUTABLE
+
+if [ -x $myfile ]; then
+    echo "$myfile is EXECUTABLE"
+else
+    echo "$myfile NOT EXECUTABLE"   
+
+fi
+echo "END"   
+-----------
+
+8. 
 
 
 
