@@ -1261,7 +1261,145 @@ fi
 echo "END"   
 -----------
 
-8. 
+8. loops in the scripting:
+
+e.g:
+------------
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+for i in {1,2,3,4}
+do
+    echo "hello"
+done
+
+echo "we continue..."
+---------------
+output:
+----
+Rajs-MacBook-Air:loops rajkhare$ ./loops.sh 
+some lines of codes here
+hello this is the number 1
+hello this is the number 2
+hello this is the number 3
+hello this is the number 4
+we continue...
+
+
+----------
+8a)this is another way to writing for loop:
+-----
+
+e.g:
+----
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+for i in {1..7}
+do
+    echo "hello this is the number $i"
+done
+
+echo "we continue..."   
+---------------
+
+OUTPUT:
+
+Rajs-MacBook-Air:loops rajkhare$ ./loops.sh 
+some lines of codes here
+hello this is the number 1
+hello this is the number 2
+hello this is the number 3
+hello this is the number 4
+hello this is the number 5
+hello this is the number 6
+hello this is the number 7
+we continue...
+
+--------------
+
+8b)very interesging things to know that i can have any value; it's not restricted to the number only. for e.g:
+
+---
+e.g:
+---
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+for i in {1,"dog",-5,"hello","something",-8}
+do
+    echo "hello this is the value:  $i"
+done
+
+echo "we continue..."   
+----------
+OUTPUT:
+
+some lines of codes here
+hello this is the value:  1
+hello this is the value:  dog
+hello this is the value:  -5
+hello this is the value:  hello
+hello this is the value:  something
+hello this is the value:  -8
+we continue...
+--------
+
+8c) exteremly useful commands to loop is 'break'; because sometimes you want to break the loop in middle.
+-----
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+for i in {1,"dog","danger","hello","something",-8}
+do
+    echo "hello this is the value:  $i"
+    if [ $i == "danger" ]; then
+        echo "* We have to STOP loop here *"
+    break
+    fi
+done
+
+echo "we continue..."   
+-------
+OUTPUT:
+some lines of codes here
+hello this is the value:  1
+hello this is the value:  dog
+hello this is the value:  danger
+* We have to STOP loop here *
+we continue...
+----------
+
+8d) for loop is very useful on the files.
+for e.g if we want to list all the files in any directory using the for loop:
+
+-----
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+for i in ./*
+do
+    echo "name of the file is:  $i"
+done    
+--------
+OUTPUT:
+--
+ some lines of codes here
+name of the file is:    ./loops.sh
+-----
+
+
+9. Top 5 Mistakes in Bash Shell Scripting!
 
 
 
