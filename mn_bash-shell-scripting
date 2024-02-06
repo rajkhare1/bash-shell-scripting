@@ -1261,7 +1261,7 @@ fi
 echo "END"   
 -----------
 
-8. loops in the scripting:
+8. loops in the scripting: for loop
 
 e.g:
 ------------
@@ -1281,10 +1281,10 @@ output:
 ----
 Rajs-MacBook-Air:loops rajkhare$ ./loops.sh 
 some lines of codes here
-hello this is the number 1
-hello this is the number 2
-hello this is the number 3
-hello this is the number 4
+hello 
+hello 
+hello 
+hello 
 we continue...
 
 
@@ -1322,7 +1322,7 @@ we continue...
 
 --------------
 
-8b)very interesging things to know that i can have any value; it's not restricted to the number only. for e.g:
+8b)very interesging things to know that i can have any value; it's not restricted to the numbers only. for e.g:
 
 ---
 e.g:
@@ -1398,8 +1398,105 @@ OUTPUT:
 name of the file is:    ./loops.sh
 -----
 
-
+--------------------------------------------
 9. Top 5 Mistakes in Bash Shell Scripting!
+----------------------------------------
+1. always put the spaces in sides the if condtions otherwiese it will not work.
+2. never give the space when you are declaring the variable.
+3. always wrap the calling time of variable so it will not considerd as two values. for. eg.
+   
+   a="hello there"
+   
+   if [ "$a" == "hello there" ]; then  -> then it will not considered the two value like hello and there.
+4. mistaked do when append the variable so we need to use the proper syntax.
+  
+  a="hello"
+  b="yesterday"
+
+  echo "${a}${b}"  -> this is the correct way to acces the value of the variable.
+
+5. always use the double quotes not the single quotes in the commads like echo. single code always preserve the valeu so it will not interpret the $variablename.
+-------------------------------------------------
+-------------------------------------------------------------------------------
+
+10. While loop:
+
+e.g:
+-------------
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+number=1
+while [ $number -le 15 ];
+do
+    echo "number is $number"
+    number=$(( number + 4 ))
+done    
+
+echo " "
+echo "bye"
+
+echo "we continue.."
+---------------------
+OUTPUT:
+some lines of codes here
+number is 1
+number is 5
+number is 9
+number is 13
+ 
+bye
+we continue..
+----------------------------
+
+NOTE: Be aware of the using of the while loops, because if the conditions is not matched then loop will run for indefinite times.
+
+----------------------------------------------------------------------------
+
+11. sleep command:
+
+we can use the sleep command in loops to delay some time on termianl. e.g:
+
+-----
+#! /bin/bash
+
+
+echo "some lines of codes here"
+
+for i in {0..10}
+do
+    echo "number :  $i"
+    sleep 0.5
+done
+
+echo " "
+echo "bye"  
+-------
+OUTPUT:
+some lines of codes here
+number :    0
+number :    1
+number :    2
+number :    3
+number :    4
+number :    5
+number :    6
+number :    7
+number :    8
+number :    9
+number :    10
+ 
+bye
+--------------------
+
+NOTE: we can stop exectuion of the program either ctrl+c or ctrl+z .
+
+--------------
+
+
+
 
 
 
