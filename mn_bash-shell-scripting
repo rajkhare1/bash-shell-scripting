@@ -1496,6 +1496,98 @@ NOTE: we can stop exectuion of the program either ctrl+c or ctrl+z .
 --------------
 
 
+12. Case. we can use the case like switch statement in java.
+
+for e.g:
+#! /bin/bash
+
+
+echo "select an option... "
+echo " type 1 to Do A"
+echo " type 2 to Do B"
+echo " type 3 to Do C"
+echo " type 4 to Do D"
+read choice
+
+case $choice in
+    1)
+        echo " You choose A "
+        ;;
+    2)
+        echo " You choose B "
+        ;;
+    3)
+        echo " You choose C "
+        ;;
+    4)
+        echo " You choose D "
+        ;;
+
+    *)
+        echo " None of the Above "    
+        
+esac
+
+echo "END"      
+-----------
+OUTPUT:
+
+select an option... 
+ type 1 to Do A
+ type 2 to Do B
+ type 3 to Do C
+ type 4 to Do D
+3
+ You choose C 
+END
+
+--------------
+
+Q.so what kind of options we can choose in case?
+Ans. we can choose anytype. if you type string then you can choose string as well.
+
+
+#! /bin/bash
+
+
+echo "type character,number or anything... "
+read choice
+
+case $choice in
+    [0-9])
+        echo " You typed a number "
+        ;;
+    1[2-8])
+        echo " You typed a number between 12-18 "
+        ;;  
+    [a-z])
+        echo " You typed the character in small case "
+        ;;
+    [A-Z])
+        echo " You you typed the character in Upper case "
+        ;;
+
+    *)
+        echo " None of the Above "  
+        
+esac
+
+echo "END"      
+-----------
+OUTPUT:
+Rajs-MacBook-Air:shell-scripts rajkhare$ ./case.sh 
+type character,number or anything... 
+12
+ You typed a number between 12-18 
+END
+----
+
+
+13. Exit status.
+Every command in linux system has the exit status that is a numeric value.
+if 0 - execute successfully
+if non 0 then not execute successfully.
+
 
 
 
