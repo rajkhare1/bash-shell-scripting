@@ -1588,6 +1588,192 @@ Every command in linux system has the exit status that is a numeric value.
 if 0 - execute successfully
 if non 0 then not execute successfully.
 
+we can check the exit status by $?
+
+for e.g:
+-----
+$ pwd
+/Users/rajkhare/Raj/Udemy/Bash-Shell-Scripting
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo $?
+0
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ pwd -adfdfd
+-bash: pwd: -a: invalid option
+pwd: usage: pwd [-LP]
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ echo $?
+1
+Rajs-MacBook-Air:Bash-Shell-Scripting rajkhare$ 
+---------------
+
+exit status also mentioned on the manual page of every command.
+
+for e.g
+---
+man pwd
+..
+..
+EXIT STATUS
+     The pwd utility exits 0 on success, and >0 if an error occurs.
+----------------------------
+
+exit status are important in shell scripting becasue you can take some action based on the exit status you received.
+
+
+14. Functions:
+functions is the chunk of codes that you can use many times in the script.
+
+e.g:
+===
+#! /bin/bash
+
+
+mydate(){
+    echo "today is: "
+     date
+    echo "have a GREAT day !"
+}
+
+echo "start here"
+mydate
+echo "move on.."     
+------
+OUTPUT:
+start here
+today is: 
+Wed Feb 14 04:51:54 IST 2024
+have a GREAT day !
+move on..
+-------
+=======
+
+14a) the great things about function is we can give the inputs to that.
+e.g:
+====
+#! /bin/bash
+
+
+mydate(){
+    echo "today is: "
+     date
+    echo "have a GREAT day !"
+}
+
+hello2(){
+    echo "Hello Mr. $1 "
+    echo "Hello Mr. $2 too "
+}
+
+
+echo "start here"
+mydate
+echo "-------------"
+hello2 "Raj" "Khare"
+echo "move on.."     
+---------
+OUTPUT:
+start here
+today is: 
+Wed Feb 14 04:57:45 IST 2024
+have a GREAT day !
+-------------
+Hello Mr. Raj 
+Hello Mr. Khare too 
+move on..
+-----
+=========
+
+Note: here $1 -> first input
+           $2 -> second input
+
+-------------
+
+14b)We can also return the value whatever we want.
+
+e.g:
+=======
+#! /bin/bash
+
+
+mydate(){
+    echo "today is: "
+     date
+    echo "have a GREAT day !"
+}
+
+hello2(){
+    echo "Hello Mr. $1 "
+    echo "Hello Mr. $2 too "
+    return 35
+}
+
+
+echo "start here"
+mydate
+echo "-------------"
+hello2 "Raj" "Khare"
+echo "func return value is: $?"
+echo "move on.."     
+--------
+OUTPUT:
+start here
+today is: 
+Wed Feb 14 05:03:35 IST 2024
+have a GREAT day !
+-------------
+Hello Mr. Raj 
+Hello Mr. Khare too 
+func return value is: 35
+move on..
+-------------------
+
+
+
+15. Scope of the variable:
+
+Shell scripting is different from other programming language. if you declare the variable inside the function also but it always declared as a global variable.
+
+so use as the local variable you should put the keyword 'local' before the name of variable at the time of declaring it.
+
+e.g:
+=====
+#! /bin/bash
+
+myfuncion(){
+
+    local var1="Eggs"
+    var2="Salad"
+
+    echo "var1 value inside myfuncion: $var1"
+    echo "var2 value inside myfuncion: $var2"
+}
+
+echo "Program start here..."
+
+myfunction
+
+echo "var1 value OUTSIDE myfuncion: $var1"
+echo "var2 value OUTSIDE myfuncion: $var2"
+
+echo "Program end here..."
+--------
+OUTPUT:
+
+Program start here...
+var1 value inside myfuncion: Eggs
+var2 value inside myfuncion: Salad
+var1 value OUTSIDE myfuncion: 
+var2 value OUTSIDE myfuncion: Salad
+Program end here...
+
+------------
+
+Note: it really encourages that always use the local variable so it will not mess with some other values outside the function.
+
+
+
+
+
+
+
 
 
 
