@@ -1769,6 +1769,113 @@ Program end here...
 Note: it really encourages that always use the local variable so it will not mess with some other values outside the function.
 
 
+16. exercise1: check the divisibility
+
+#! /bin/bash
+
+divisible(){
+
+    local num=$1
+    echo " you wrote $num "
+
+
+    if [ $(( $num%2 )) -eq 0 ];then
+        echo "The number $num is divisible by 2"
+    fi
+
+    if [ $(( $num%3 )) -eq 0 ];then
+        echo "The number $num is divisible by 3"
+    fi
+
+    if [ $(( $num%5 )) -eq 0 ];then
+        echo "The number $num is divisible by 5"
+    fi  
+}
+
+divisible 10
+-----
+output:
+you wrote 10 
+The number 10 is divisible by 2
+The number 10 is divisible by 5
+----------------
+
+16a) we can write the better version of above script:
+
+#! /bin/bash
+
+divisible(){
+
+    local num=$1
+    echo " you wrote $num "
+
+
+for i in {2,3,5}
+do
+    if [ $(( $num%$i )) -eq 0 ]; then
+        echo "The number $num is divisible by $i"
+    fi
+
+done    
+
+}
+
+divisible 10
+
+-----
+output:
+you wrote 10 
+The number 10 is divisible by 2
+The number 10 is divisible by 5
+----------------
+
+
+17. exercise2: find the no. of items in the folder
+
+#! /bin/bash
+
+echo "hello"
+
+number=0
+for item in ./*
+do
+    number=$(( number+1 ))
+done    
+
+echo "the no. of items in the folder is: $number"
+---------
+output:
+hello
+the no. of items in the folder is: 5
+----
+
+18. exercise3: how to create files autmatically and renamed them.
+
+step 1: creating the script for create the 4 text file:
+
+#! /bin/bash
+############### Automatically Created Script ###################
+
+for i in {1..4}; 
+do
+    touch "${i}file.txt"
+done    
+---------
+output:
+$ ls -lrt
+total 24
+drwxr-xr-x   3 rajkhare  staff   96 Jan 13 05:32 exercise1
+drwxr-xr-x   6 rajkhare  staff  192 Jan 13 05:41 exercise2
+drwxr-xr-x  13 rajkhare  staff  416 Jan 24 07:22 exercise3
+-rwxr--r--@  1 rajkhare  staff  195 Feb 15 04:54 exercise1.sh
+-rwxr--r--@  1 rajkhare  staff  136 Feb 15 05:00 exercise2.sh
+-rwxr--r--@  1 rajkhare  staff  128 Feb 15 05:07 rename.sh
+-rw-r--r--   1 rajkhare  staff    0 Feb 15 05:07 1file.txt
+-rw-r--r--   1 rajkhare  staff    0 Feb 15 05:07 2file.txt
+-rw-r--r--   1 rajkhare  staff    0 Feb 15 05:07 3file.txt
+-rw-r--r--   1 rajkhare  staff    0 Feb 15 05:07 4file.txt
+--------------------
+
 
 
 
