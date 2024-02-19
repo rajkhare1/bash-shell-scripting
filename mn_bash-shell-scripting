@@ -1878,10 +1878,85 @@ drwxr-xr-x  13 rajkhare  staff  416 Jan 24 07:22 exercise3
 
 
 
+===========================PROJECTS==============================
+
+Project-1
+=============
+
+Step 1. Create a loop on all items contained in a folder.
+
+--
+#! /bin/bash
+
+for myfile in *;
+do
+    echo "$myfile"
+done
+--
+output:
+Rajs-MacBook-Air:Projects rajkhare$ ./ourscript1.sh 
+Project1PartA
+ourscript1.sh
+---
+
+Step 2. Create a loop only on files contained in a folder.
+
+---
+#! /bin/bash
+
+for myfile in *;
+do
+    if [ -f "$myfile" ]; then
+    echo "$myfile"
+    else
+        echo "$myfile is NOT a file.."
+        echo " "
+    fi  
+done    
+---
+output:
+Rajs-MacBook-Air:Projects rajkhare$ ./ourscript1.sh 
+Project1PartA is NOT a file..
+ 
+ourscript1.sh
+---
+
+Step 3. Find a specific word in all files
+
+---
+---
+output:
+---
+
+final script to find the file which containt the desired word and copy into differnt folder:
+--------------
+#! /bin/bash
 
 
+mkdir ./hot-Folder
 
+for myfile in  * ;
+do
+    if [ -f "$myfile" ]; then
 
+        check=$(grep -ni "spo" "$myfile")
+        if [ -z "$check" ]; then
+            echo "EMPTY"
+        else
+            echo "FOUND !"
+            cp "$myfile" hot-Folder
+            echo " " >> hot-Folder/"$myfile"
+            echo "*******" >> hot-Folder/"$myfile"
+            echo "$check" >> hot-Folder/"$myfile"
+            
+        fi
+    else
+        echo "$myfile  is not a file"
+        echo " "
+    fi
+        echo "----------------------------"
+done
+----------
 
 
 
