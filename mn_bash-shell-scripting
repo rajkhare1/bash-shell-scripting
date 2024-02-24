@@ -1960,6 +1960,192 @@ done
 
 
 
+PROJECT2:
+===========
+Step 1: Run recursively through all folders
+
+e.g:
+---
+#! /bin/bash
+
+#f=$(find . -type d)
+
+for i in $(find . -type d);
+do
+    echo "THIS is the folder: $i"
+
+done    
+--------
+output:
+Rajs-MacBook-Air:Projects rajkhare$ ./ourscript2.sh 
+THIS is the folder: .
+THIS is the folder: ./folder2
+THIS is the folder: ./folder2/folder2A
+THIS is the folder: ./folder1
+THIS is the folder: ./Project1PartA
+Rajs-MacBook-Air:Projects rajkhare$ 
+--------
+
+Step 2: Within each folder, run a for loop on each file.
+
+e.g:
+-----
+#! /bin/bash
+
+#f=$(find . -type d)
+
+for i in $(find . -type d);
+do
+    echo "THIS is the folder: $i"
+
+    for myfile in $i/* ;
+    do
+        if [ -f "$myfile" ]; then
+        echo "the file inside is: $myfile"
+        fi
+    done
+    echo "----------------"
+    echo "  "   
+done    
+----------
+output:
+Rajs-MacBook-Air:Projects rajkhare$ ./ourscript2.sh 
+THIS is the folder: .
+the file inside is: ./1.txt
+the file inside is: ./2.txt
+the file inside is: ./3.txt
+the file inside is: ./MT-Les54-PROJECT-1.sh
+the file inside is: ./MT-Les55-PROJECT-2.sh
+the file inside is: ./MT-Les56-PROJECT-3.sh
+the file inside is: ./ourscript1.sh
+the file inside is: ./ourscript2.sh
+----------------
+  
+THIS is the folder: ./folder2
+----------------
+  
+THIS is the folder: ./folder2/folder2A
+----------------
+  
+THIS is the folder: ./folder1
+----------------
+  
+THIS is the folder: ./Project1PartA
+the file inside is: ./Project1PartA/MT-Les54-PROJECT-1.sh
+----------------
+=======
+
+
+Step3: We carefully add the previous script withing this loop.
+
+Final scipt for finding hotword and copy into hot-folder:
+============
+========
+#! /bin/bash
+
+#f=$(find . -type d)
+
+for i in $(find . -type d);
+do
+
+if [ "$i" != "./hot-folder" ]; then
+        
+    echo "***********FOLDER $i ******************"
+
+    for myfile in $i/* ;
+    do
+        if [ -f "$myfile" ]; then
+            echo "the file inside is: $myfile"
+            check=$(grep -ni "spo" "$myfile")
+            if [ -z "$check" ]; then
+                echo "EMPTY"
+            else
+                echo "HOT FILE!! FOUND!"    
+
+                name_f=$(basename $myfile)
+                
+                mkdir ./hot-folder
+                cp "$myfile" ./hot-folder/"$name_f"
+                echo "  " >> hot-folder/"$name_f"
+                echo "*********" >> hot-folder/"$name_f"
+                echo "$check" >> hot-folder/"$name_f"
+            fi
+        fi
+    done
+    echo "----------------"
+    echo "  "
+fi      
+done    
+=========
+
+Bonus:
+
+Same script using the functions can reduce lot of code:
+
+=========
+#! /bin/bash
+
+# Function
+
+get_File(){
+
+    local str="$1"
+    local fil="$2"
+
+
+    # echo "the string you are Looking for is: $str "
+    # echo " the file is you are searching is  $fil  "
+
+    #grep -ni $str $fil
+
+    check=$(grep -ni "$str" "$fil")
+
+    if [ -z "$check" ]; then
+        echo "### Empty! ###"
+    else
+        echo "FOUND!"
+        local name_file=$(basename "$fil")
+        #echo "just the name is: $name_file"
+
+        cp "$fil" hot-Folder/"$name_file"
+        echo " " >> hot-Folder/"$name_file"
+        echo "*-------##****" >> hot-Folder/"$name_file"
+        echo "$check" >> hot-Folder/"$name_file"
+    fi
+}
+
+
+
+
+
+
+###################### Whole Program ###################
+rm -r /hot-folder
+mkdir ./hot-Folder
+
+for i in $(find . -type d);
+do
+
+if [ "$i" != "./hot-folder" ]; then
+    echo "************* THE FOLDER IS $i ***********"
+    for myfile in $i/*;
+    do                                                  
+        if [ -f "$myfile" ] ; then              #           
+            get_File "spo" "$myfile"            # Function
+        fi                                      #       
+    done
+fi  
+    echo "--------------"
+done
+###################### Whole Program ###################
+
+
+
+
+
+
+
+============================END=========================
 
 
 
